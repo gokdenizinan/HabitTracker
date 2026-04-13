@@ -9,11 +9,13 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
 *.xcuserstate
 
 # Swift Package Manager
 .build/
+Package.resolved
 
 # CocoaPods
 Pods/
@@ -32,5 +34,9 @@ fastlane/screenshots/
 # Logs
 *.log
 
-# User-specific
+# Vim
 *.swp
+
+# Private
+q
+q.pub
