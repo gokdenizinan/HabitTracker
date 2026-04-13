@@ -10,20 +10,16 @@ import SwiftUI
 struct ContentView: View {
     
     // Storage
-    @State var habitsArray: [Habit] = [
-        Habit(id: UUID(), name: "Read a Book", isComplete: false, point: 10),
-        Habit(id: UUID(), name: "Exercise", isComplete: true, point: 10),
-        Habit(id: UUID(), name: "Practice Coding", isComplete: true, point: 10)
-    ]
     @State var  newHabitName: String = ""
     @State var newHabitPoint: String = ""
+    @StateObject var viewModel = HabitsViewModel()
     
     var body: some View {
         ZStack {
             VStack(alignment: .center, spacing: 20){
                 Text("My Habits").font(Font.custom("Geist-Regular", size: 50)).padding(.top,100)
                 List{
-                    ForEach($habitsArray) { $habit in
+                    ForEach($viewModel.habitsArray) { $habit in
                         HStack (alignment: .center, spacing: 20){
                             Text(habit.name)
                                 .padding(.leading)
@@ -35,7 +31,7 @@ struct ContentView: View {
                         }
                         .swipeActions(edge: .leading){
                             Button(role: .destructive) {
-                                habitsArray.removeAll {$0.id == habit.id}
+                                viewModel.deleteHabit(habit: habit)
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -62,7 +58,7 @@ struct ContentView: View {
                             {
                                 if let points = Int(newHabitPoint)
                                 {
-                                    habitsArray.append(Habit(id: UUID(), name: newHabitName, isComplete: false, point: points))
+                                    viewModel.createHabit(newHabitName: newHabitName, isComplete: false, newHabitPoint: points)
                                 }
                                 newHabitName = ""
                                 newHabitPoint = ""
