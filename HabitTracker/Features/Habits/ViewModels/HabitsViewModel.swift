@@ -23,7 +23,6 @@ class HabitsViewModel: ObservableObject{
     func deleteHabit(habit: Habit){
         habitsArray.removeAll {$0.id == habit.id}
     }
-
     func updateHabit(habit: Habit, difHabitName: String, difHabitPoint: String){
         
         if let index = habitsArray.firstIndex(where: {$0.id == habit.id}){
